@@ -25,8 +25,8 @@ pipeline {
             steps {
                 script {
                     // Securely store Docker registry credentials in Jenkins Credentials Management
-                    withCredentials([usernamePassword(credentialsId: '74e88eaa-c12e-4c73-b140-a6ebcec556e3', passwordVariable: 'DOCKER_USERNAME', usernameVariable: 'DOCKER_PASSWORD')]) {
-                       bat "echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin https://hub.docker.com"
+                   docker.withRegistry('https://registry.hub.docker.com', '74e88eaa-c12e-4c73-b140-a6ebcec556e3') {
+                        // Push the Docker image to Docker Hub
                         bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
                         bat 'docker push tejaswimedisetti/tejajenkinsrepo'
                     
