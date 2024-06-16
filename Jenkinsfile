@@ -5,7 +5,7 @@ pipeline {
         // Define environment variables for Docker Hub credentials
         DOCKER_HUB_USERNAME = credentials('tejaswimedisetti')
         DOCKER_HUB_PASSWORD = credentials('shashiteja@3028')
-        DOCKER_HUB_REPO = 'tejaswimedisetti/tejajenkins'
+        DOCKER_HUB_REPO = 'tejaswimedisetti/tejajenkinsrepo'
         // Define any other environment variables needed
     }
 
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 // Checkout your source code repository (e.g., Git)
                 git url: 'https://github.com/Tejaswi53/integrating_docker.git'
-                checkout scm
+                
             }
         }
 
