@@ -1,12 +1,6 @@
 pipeline {
     agent any  // Adjust if you need a specific agent (e.g., label)
-     environment {
-        // Define environment variables for Docker Hub credentials
-        DOCKER_HUB_USERNAME = credentials('tejaswimedisetti')
-        DOCKER_HUB_PASSWORD = credentials('shashiteja@3028')
-                // Define any other environment variables needed
-    }
-
+     
     stages {
         stage('Checkout Code') {
             steps {
@@ -31,8 +25,7 @@ pipeline {
             steps {
                 script {
                     // Securely store Docker registry credentials in Jenkins Credentials Management
-                   
-                       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.withRegistry('https://registry.hub.docker.com', '74e88eaa-c12e-4c73-b140-a6ebcec556e3') {
                         // Push the Docker image to Docker Hub
                         bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
                         bat 'docker push tejaswimedisetti/tejajenkinsrepo'
