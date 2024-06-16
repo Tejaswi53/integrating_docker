@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('git clone') {
             steps {
                 // Checkout your source code repository (e.g., Git)
                 git url: 'https://github.com/Tejaswi53/integrating_docker.git'
@@ -47,12 +47,5 @@ pipeline {
         
     }
 
-    post {
-        success {
-            echo 'Docker image build and push successful!'
-        }
-        failure {
-            echo 'Docker image build and push failed!'
-        }
-    }
+   
 }
