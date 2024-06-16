@@ -1,51 +1,40 @@
 pipeline {
-    agent any
-
-    environment {
-        // Define environment variables for Docker Hub credentials
-        DOCKER_HUB_USERNAME = credentials('tejaswimedisetti')
-        DOCKER_HUB_PASSWORD = credentials('shashiteja@3028')
-        DOCKER_HUB_REPO = 'tejaswimedisetti/tejajenkinsrepo'
-        // Define any other environment variables needed
-    }
+    agent any  // Adjust if you need a specific agent (e.g., label)
 
     stages {
-        stage('git clone') {
+        stage('Checkout Code') {
             steps {
-                // Checkout your source code repository (e.g., Git)
-                git url: 'https://github.com/Tejaswi53/integrating_docker.git'
-                
+                git branch: 'main', // Replace with your branch name
+                    url: 'https://github.com/Tejaswi53/integrating_docker.git' // Replace with your Git repository URL
             }
         }
-
         stage('Build Docker Image') {
             steps {
-                // Build the Docker image using Dockerfile
+                bat 'docker build -t tejajenkins .' // Replace with your image name
+            }
+        }
+        stage('Run Tests (Optional)') {
+            steps {
                 script {
-                    bat 'docker build -t tejajenkins .' // Replace with your image name
-                    bat 'docker run -d --name contr1 -p 8001:80 tejajenkins:latest '
-                      
+                    // Customize testing commands based on your framework and container environment
+                    bat 'docker run -d --name cont1 -p 8001:80 tejajenkins'
                 }
             }
         }
-
-        stage('Push to Docker Hub') {
+        stage('Deploy Image (Optional)') {
             steps {
-                // Log in to Docker Hub
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', '74e88eaa-c12e-4c73-b140-a6ebcec556e3') {
-                        // Push the Docker image to Docker Hub
-                       
-                       bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
-                       bat 'docker push tejaswimedisetti/tejajenkinsrepo:latest'
-                        
+                    // Securely store Docker registry credentials in Jenkins Credentials Management
+                    withCredentials([usernamePassword(credentialsId: '74e88eaa-c12e-4c73-b140-a6ebcec556e3', passwordVariable: 'DOCKER_USERNAME', usernameVariable: 'DOCKER_PASSWORD')]) {
+                       bat "echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin https://hub.docker.com"
+                        bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
+                        bat 'docker push tejaswimedisetti/tejajenkinsrepo'
+                    
                     }
                 }
             }
         }
-
-        
     }
 
-   
+
 }
