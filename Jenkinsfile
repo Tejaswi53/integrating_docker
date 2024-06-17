@@ -1,5 +1,8 @@
 pipeline {
     agent any  // Adjust if you need a specific agent (e.g., label)
+    environent {
+        DOCKERHUB_CREDENTIALS = credentials('74e88eaa-c12e-4c73-b140-a6ebcec556e3')
+    }
      
     stages {
         stage('Checkout Code') {
@@ -23,15 +26,13 @@ pipeline {
         }
         stage('Deploy Image (Optional)') {
             steps {
-                script {
-                    // Securely store Docker registry credentials in Jenkins Credentials Management
-                        docker.withRegistry('https://registry.hub.docker.com', '74e88eaa-c12e-4c73-b140-a6ebcec556e3') {
-                        // Push the Docker image to Docker Hub
-                        bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
-                        bat 'docker push tejaswimedisetti/tejajenkinsrepo'
-                    
-                    }
-                }
+                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('push image') {
+            steps {
+                bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo
+                bat 'docker push tejaswimedisetti/tejajenkinsrepo
             }
         }
     }
