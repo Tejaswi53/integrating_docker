@@ -1,6 +1,6 @@
 pipeline {
     agent any  // Adjust if you need a specific agent (e.g., label)
-    environent {
+    environment {
         DOCKERHUB_CREDENTIALS = credentials('74e88eaa-c12e-4c73-b140-a6ebcec556e3')
     }
      
