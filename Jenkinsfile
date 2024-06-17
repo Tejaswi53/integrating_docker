@@ -31,8 +31,8 @@ pipeline {
         }
         stage('push image') {
             steps {
-                bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo
-                bat 'docker push tejaswimedisetti/tejajenkinsrepo
+                bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
+                bat 'docker push tejaswimedisetti/tejajenkinsrepo'
             }
         }
     }
