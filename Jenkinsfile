@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Customize testing commands based on your framework and container environment
-                    bat 'docker run -d --name cont2 -p 8002:80 tejajenkins'
+                    bat 'docker run -d --name cont3 -p 8003:80 tejajenkins'
                 }
             }
         }
