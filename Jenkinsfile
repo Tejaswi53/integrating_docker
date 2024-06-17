@@ -1,7 +1,7 @@
 pipeline {
     agent any  // Adjust if you need a specific agent (e.g., label)
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('74e88eaa-c12e-4c73-b140-a6ebcec556e3')
+        DOCKERHUB_CREDENTIALS = credentials('docker')
     }
      
     stages {
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Customize testing commands based on your framework and container environment
-                    bat 'docker run -d --name cont3 -p 8003:80 tejajenkins'
+                    bat 'docker run -d --name cont4 -p 8004:80 tejajenkins'
                 }
             }
         }
