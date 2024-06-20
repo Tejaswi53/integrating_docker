@@ -13,14 +13,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t tejajenkins1 .' // Replace with your image name
+                bat 'docker build -t tejajenkins2 .' // Replace with your image name
             }
         }
         stage('Run Tests (Optional)') {
             steps {
                 script {
                     // Customize testing commands based on your framework and container environment
-                    bat 'docker run -d --name cont9 -p 8009:80 tejajenkins'
+                    bat 'docker run -d --name cont10 -p 8010:80 tejajenkins2'
                 }
             }
         }
