@@ -19,6 +19,12 @@ pipeline {
                 bat "docker login -u tejaswimedisetti -p shashiteja@3028"
             }
         }
+        stage('image build') {
+            steps {
+                bat "docker build -t tejaswi ."
+            }
+        }
+        
     }
 }
         
