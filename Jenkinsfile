@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Adjust if you need a specific agent (e.g., label)
+    agent any  
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker')
     }
@@ -7,24 +7,23 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', // Replace with your branch name
-                    url: 'https://github.com/Tejaswi53/integrating_docker.git' // Replace with your Git repository URL
+                git branch: 'main', 
+                    url: 'https://github.com/Tejaswi53/integrating_docker.git' 
             }
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t tejajenkins2 .' // Replace with your image name
+                bat 'docker build -t tejajenkins2 .' 
             }
         }
-        stage('Run Tests (Optional)') {
+        stage('Run Tests') {
             steps {
                 script {
-                    // Customize testing commands based on your framework and container environment
-                    bat 'docker run -d --name cont10 -p 8010:80 tejajenkins2'
+                    bat 'docker run -d --name cont11 -p 8011:80 tejajenkins2'
                 }
             }
         }
-        stage('Deploy Image (Optional)') {
+        stage('Deploy Image') {
             steps {
                 bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
