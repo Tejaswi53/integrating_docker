@@ -15,6 +15,7 @@ pipeline {
         
         stage('Docker login') {
             steps {
+                bat "echo ${DOCKER_HUB_USERNAME}"
                 bat "docker login -u tejaswimedisetti -p shashiteja@3028"
             }
         }
