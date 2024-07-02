@@ -1,7 +1,7 @@
 pipeline {
     agent any  
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker')
+        DOCKERHUB_CREDENTIALS = credentials('Docker')
     }
      
     stages {
@@ -19,7 +19,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    bat 'docker run -d --name cont12 -p 8012:80 tejajenkins2'
+                    bat 'docker run -d --name cont13 -p 8013:80 tejajenkins2'
                 }
             }
         }
