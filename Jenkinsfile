@@ -26,7 +26,7 @@ pipeline {
         }
         stage('container') {
             steps {
-                bat "docker run -d --name cont15 -p 8015:80 tejaswi"
+                bat "docker run -d --name cont16 -p 8016:80 tejaswi"
             }
         }
         stage('pushing image to docker') {
