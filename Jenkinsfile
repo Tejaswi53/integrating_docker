@@ -26,12 +26,13 @@ pipeline {
         }
         stage('container') {
             steps {
-                bat "docker run -d --name cont16 -p 8016:80 tejaswi"
+                bat "docker run -d --name cont17 -p 8017:80 tejaswi"
             }
         }
         stage('pushing image to docker') {
             steps {
-                bat "docker push tejaswim/tejaswi:latest"
+                bat "docker tag tejaswi tejaswimedisetti/tejaswim"
+                bat "docker push tejaswimedisetti/tejaswim"
             }
         }
         
