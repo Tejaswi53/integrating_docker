@@ -1,40 +1,27 @@
 pipeline {
     agent any  
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('Docker')
+        DOCKER_HUB_USERNAME = credentials('Docker') 
+        DOCKER_HUB_PASSWORD = credentials('Docker')
     }
      
     stages {
-        stage('Checkout Code') {
+         stage('Checkout Code') {
             steps {
                 git branch: 'main', 
                     url: 'https://github.com/Tejaswi53/integrating_docker.git' 
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t tejajenkins2 .' 
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                script {
-                    bat 'docker run -d --name cont14 -p 8014:80 tejajenkins2'
-                }
-            }
-        }
+        
         stage('Deploy Image') {
             steps {
-                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-        stage('push image') {
-            steps {
-                bat 'docker tag tejajenkins tejaswimedisetti/tejajenkinsrepo'
-                bat 'docker push tejaswimedisetti/tejajenkinsrepo'
+                bat "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
             }
         }
     }
-
-
 }
+        
+        
+            
+        
+        
