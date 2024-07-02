@@ -24,6 +24,11 @@ pipeline {
                 bat "docker build -t tejaswi ."
             }
         }
+        stage('container') {
+            steps {
+                bat "docker run -it --name cont15 -p 8015:80 tejaswi"
+            }
+        }
         
     }
 }
