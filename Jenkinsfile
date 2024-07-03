@@ -14,9 +14,10 @@ pipeline {
         }
         stage('docker login') {
             steps {
-                 // This step should not normally be used in your script. Consult the inline help for details.
-                    withDockerRegistry(credentialsId: 'Docker') {
-                    bat "docker build -t tejaswi ."
+                // This step should not normally be used in your script. Consult the inline help for details.
+                   withDockerRegistry(credentialsId: 'Docker', url: 'https://hub.docker.com/repositories/tejaswimedisetti') {
+                    }
+                   bat "docker build -t tejaswi ."
                    }
                 
                
@@ -28,7 +29,7 @@ pipeline {
         
         
     }
-}
+
         
         
             
