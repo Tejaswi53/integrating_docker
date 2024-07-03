@@ -29,7 +29,7 @@ withDockerRegistry(credentialsId: 'Docker') {
         }
         stage('container') {
             steps {
-                bat "docker run -d --name cont17 -p 8017:80 tejaswi"
+                bat "docker run -d --name cont18 -p 8018:80 tejaswi"
             }
         }
         stage('pushing image to docker') {
