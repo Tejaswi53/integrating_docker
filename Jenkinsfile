@@ -14,10 +14,12 @@ pipeline {
         }
         stage('docker login') {
             steps {
-                // This step should not normally be used in your script. Consult the inline help for details.
-                   withDockerRegistry(credentialsId: 'Docker', url: 'https://hub.docker.com/repositories/tejaswimedisetti') {
+                script {
+                   withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'password', usernameVariable: 'username')]) {
+                     bat "docker login -u %username% --password-stdin"
                     }
-                   bat "docker build -t tejaswi ."
+                }
+                   
                    }
                 
                
