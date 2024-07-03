@@ -1,10 +1,5 @@
 pipeline {
     agent any  
-    environment {
-        DOCKER_HUB_USERNAME = credentials('Docker') 
-        DOCKER_HUB_PASSWORD = credentials('Docker')
-    }
-     
     stages {
          stage('Checkout Code') {
             steps {
@@ -12,6 +7,17 @@ pipeline {
                     url: 'https://github.com/Tejaswi53/integrating_docker.git' 
             }
         }
+        stage('image build') {
+            steps {
+                bat "docker build -t tejaswi ."
+            }
+        }
+        stage('container') {
+            steps {
+                bat "docker run -d --name cont19 -p 8019:80 tejaswi"
+            }
+        }
+        
         stage('docker login') {
             steps {
                 script {
@@ -21,17 +27,10 @@ pipeline {
                     '''
                     }
                 }
-                   
-                   }
-                
-               
+                   }   
             }
-        }
         
-        
-       
-        
-        
+        }   
     }
 
         
