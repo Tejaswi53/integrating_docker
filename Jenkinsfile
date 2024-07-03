@@ -12,13 +12,16 @@ pipeline {
                     url: 'https://github.com/Tejaswi53/integrating_docker.git' 
             }
         }
-        
-        stage('Docker login') {
+        stage {
             steps {
-                bat "echo ${DOCKER_HUB_USERNAME}"
-                bat "docker login -u tejaswimedisetti -p shashiteja@3028"
+                // This step should not normally be used in your script. Consult the inline help for details.
+withDockerRegistry(credentialsId: 'Docker') {
+    // some block
+}
             }
         }
+        
+       
         stage('image build') {
             steps {
                 bat "docker build -t tejaswi ."
