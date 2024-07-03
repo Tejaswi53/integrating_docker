@@ -12,7 +12,7 @@ pipeline {
                     url: 'https://github.com/Tejaswi53/integrating_docker.git' 
             }
         }
-        stage ('docker login'){
+        stage('docker login') {
             steps {
                  // This step should not normally be used in your script. Consult the inline help for details.
                     withDockerRegistry(credentialsId: 'Docker') {
